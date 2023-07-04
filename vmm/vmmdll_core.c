@@ -45,7 +45,7 @@ VOID VmmDllCore_CloseHandle(_In_opt_ _Post_ptr_invalid_ VMM_HANDLE H, _In_ BOOL 
 * This function should only be called from DllMain.
 * NB! it's ok to leak the initialized globals since the leak will be minor only.
 */
-VOID VmmDllCore_InitializeGlobals()
+EXTERN_C __attribute__((unused)) VOID VmmDllCore_InitializeGlobals()
 {
     if(!g_VMMDLL_INITIALIZED) {
         g_VMMDLL_INITIALIZED = TRUE;
@@ -56,7 +56,7 @@ VOID VmmDllCore_InitializeGlobals()
 
 #ifdef _WIN32
 BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_ PVOID lpvReserved)
-{    
+{
     if(fdwReason == DLL_PROCESS_ATTACH) {
         VmmDllCore_InitializeGlobals();
         VmmDllRemote_InitializeGlobals();
