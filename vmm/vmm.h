@@ -1767,6 +1767,18 @@ VOID VmmCacheReserveReturn(_In_ VMM_HANDLE H, _In_opt_ PVMMOB_CACHE_MEM pOb);
 * -- qwA
 * -- pb
 * -- cb
+* -- pcbWrite
+* -- return = TRUE on success, FALSE on partial or zero write.
+ */
+VOID VmmWriteEx(_In_ VMM_HANDLE H, _In_opt_ PVMM_PROCESS pProcess, _In_ QWORD qwA, _In_ PBYTE pb, _In_ DWORD cb, _Out_opt_ PDWORD pcbWrite);
+
+/*
+* Write a virtually contigious arbitrary amount of memory.
+* -- H
+* -- pProcess
+* -- qwA
+* -- pb
+* -- cb
 * -- return = TRUE on success, FALSE on partial or zero write.
 */
 BOOL VmmWrite(_In_ VMM_HANDLE H, _In_opt_ PVMM_PROCESS pProcess, _In_ QWORD qwA, _In_reads_(cb) PBYTE pb, _In_ DWORD cb);
