@@ -132,11 +132,11 @@ typedef enum tdVMM_SYSTEM_TP {
 } VMM_SYSTEM_TP;
 
 static LPCSTR VMM_SYSTEM_TP_STRING[] = {
-    [VMM_SYSTEM_UNKNOWN_PHYSICAL] = "Physical",
-    [VMM_SYSTEM_UNKNOWN_64]       = "Unknown 64-bit",
-    [VMM_SYSTEM_WINDOWS_64]       = "Windows 64-bit",
-    [VMM_SYSTEM_UNKNOWN_32]       = "Unknown 32-bit",
-    [VMM_SYSTEM_WINDOWS_32]       = "Windows 32-bit",
+    "Physical",
+    "Unknown 64-bit",
+    "Windows 64-bit",
+    "Unknown 32-bit",
+    "Windows 32-bit",
 };
 
 typedef enum tdVMM_PTE_TP {
@@ -706,9 +706,9 @@ typedef enum tdVMM_VM_TP {
 } VMM_VM_TP;
 
 static LPCSTR VMM_VM_TP_STRING[] = {
-    [VMM_VM_TP_UNKNOWN]         = "VM Unknown",
-    [VMM_VM_TP_HV]              = "Hyper-V",
-    [VMM_VM_TP_HV_WHVP]         = "Hyper-V WHVP",
+    "VM Unknown",
+    "Hyper-V",
+    "Hyper-V WHVP",
 };
 
 typedef struct tdVMM_MAP_VMENTRY {

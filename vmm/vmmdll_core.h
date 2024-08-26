@@ -88,6 +88,10 @@ VOID VmmDllCore_CloseAll();
 */
 VOID VmmDllCore_Close(_In_opt_ _Post_ptr_invalid_ VMM_HANDLE H);
 
+#if defined(_MSC_VER)
+EXTERN_C VOID VmmDllCore_InitializeGlobals();
+#else
 EXTERN_C __attribute__((unused)) VOID VmmDllCore_InitializeGlobals();
+#endif
 
 #endif /* __VMMDLL_CORE_H__ */

@@ -45,7 +45,11 @@ VOID VmmDllCore_CloseHandle(_In_opt_ _Post_ptr_invalid_ VMM_HANDLE H, _In_ BOOL 
 * This function should only be called from DllMain.
 * NB! it's ok to leak the initialized globals since the leak will be minor only.
 */
+#if defined(_MSC_VER)
+EXTERN_C VOID VmmDllCore_InitializeGlobals()
+#else
 EXTERN_C __attribute__((unused)) VOID VmmDllCore_InitializeGlobals()
+#endif
 {
     if(!g_VMMDLL_INITIALIZED) {
         g_VMMDLL_INITIALIZED = TRUE;

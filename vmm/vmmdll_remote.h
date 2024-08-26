@@ -59,4 +59,10 @@ NTSTATUS VmmDllRemote_VfsReadU(_In_ VMM_HANDLE H, _In_ LPCSTR uszFileName, _Out_
 */
 NTSTATUS VmmDllRemote_VfsWriteU(_In_ VMM_HANDLE H, _In_ LPCSTR uszFileName, _In_reads_(cb) PBYTE pb, _In_ DWORD cb, _Out_ PDWORD pcbWrite, _In_ ULONG64 cbOffset);
 
+#if defined(_MSC_VER)
+EXTERN_C VOID VmmDllRemote_InitializeGlobals();
+#else
+EXTERN_C __attribute__((unused)) VOID VmmDllRemote_InitializeGlobals();
+#endif
+
 #endif /* __VMMDLL_REMOTE_H__ */

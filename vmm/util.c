@@ -17,14 +17,14 @@ DWORD Util_GetNumDigits(_In_ DWORD dwNumber)
     return (DWORD)max(1, floor(log10(dwNumber) + 1));
 }
 
-QWORD Util_GetNumericA(_In_ LPCSTR sz)
-{
-    if((strlen(sz) > 1) && (sz[0] == '0') && ((sz[1] == 'x') || (sz[1] == 'X'))) {
-        return strtoull(sz, NULL, 16); // Hex (starts with 0x)
-    } else {
-        return strtoull(sz, NULL, 10); // Not Hex -> try Decimal
-    }
-}
+//QWORD Util_GetNumericA(_In_ LPCSTR sz)
+//{
+//    if((strlen(sz) > 1) && (sz[0] == '0') && ((sz[1] == 'x') || (sz[1] == 'X'))) {
+//        return strtoull(sz, NULL, 16); // Hex (starts with 0x)
+//    } else {
+//        return strtoull(sz, NULL, 10); // Not Hex -> try Decimal
+//    }
+//}
 
 #define Util_2HexChar(x) (((((x) & 0xf) <= 9) ? '0' : ('a' - 10)) + ((x) & 0xf))
 
@@ -947,33 +947,33 @@ NTSTATUS Util_VfsLineFixedMapCustom_Read(
 * .dll/.so file.
 * -- szPath
 */
-VOID Util_GetPathLib(_Out_writes_(MAX_PATH) PCHAR szPath)
-{
-    SIZE_T i;
-    ZeroMemory(szPath, MAX_PATH);
-#ifdef _WIN32
-    HMODULE hModuleVmm;
-    WCHAR wszPath[MAX_PATH] = { 0 };
-    hModuleVmm = LoadLibraryU("vmm.dll");
-    GetModuleFileNameW(hModuleVmm, wszPath, MAX_PATH - 4);
-    CharUtil_WtoU(wszPath, -1, (PBYTE)szPath, MAX_PATH, NULL, NULL, CHARUTIL_FLAG_STR_BUFONLY | CHARUTIL_FLAG_TRUNCATE);
-    if(hModuleVmm) { FreeLibrary(hModuleVmm); }
-#endif /* _WIN32 */
-#ifdef LINUX
-    Dl_info Info = { 0 };
-    if(!dladdr((void *)Util_GetPathLib, &Info) || !Info.dli_fname) {
-        GetModuleFileNameA(NULL, szPath, MAX_PATH - 4);
-    } else {
-        strncpy(szPath, Info.dli_fname, MAX_PATH - 1);
-    }
-#endif /* LINUX */
-    for(i = strlen(szPath) - 1; i > 0; i--) {
-        if(szPath[i] == '/' || szPath[i] == '\\') {
-            szPath[i + 1] = '\0';
-            return;
-        }
-    }
-}
+//VOID Util_GetPathLib(_Out_writes_(MAX_PATH) PCHAR szPath)
+//{
+//    SIZE_T i;
+//    ZeroMemory(szPath, MAX_PATH);
+//#ifdef _WIN32
+//    HMODULE hModuleVmm;
+//    WCHAR wszPath[MAX_PATH] = { 0 };
+//    hModuleVmm = LoadLibraryU("vmm.dll");
+//    GetModuleFileNameW(hModuleVmm, wszPath, MAX_PATH - 4);
+//    CharUtil_WtoU(wszPath, -1, (PBYTE)szPath, MAX_PATH, NULL, NULL, CHARUTIL_FLAG_STR_BUFONLY | CHARUTIL_FLAG_TRUNCATE);
+//    if(hModuleVmm) { FreeLibrary(hModuleVmm); }
+//#endif /* _WIN32 */
+//#ifdef LINUX
+//    Dl_info Info = { 0 };
+//    if(!dladdr((void *)Util_GetPathLib, &Info) || !Info.dli_fname) {
+//        GetModuleFileNameA(NULL, szPath, MAX_PATH - 4);
+//    } else {
+//        strncpy(szPath, Info.dli_fname, MAX_PATH - 1);
+//    }
+//#endif /* LINUX */
+//    for(i = strlen(szPath) - 1; i > 0; i--) {
+//        if(szPath[i] == '/' || szPath[i] == '\\') {
+//            szPath[i + 1] = '\0';
+//            return;
+//        }
+//    }
+//}
 
 VOID Util_GetPathDll(_Out_writes_(MAX_PATH) PCHAR szPath, _In_opt_ HMODULE hModule)
 {
